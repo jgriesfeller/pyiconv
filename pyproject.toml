@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyaerocom_parallelization"
-version = "0.3.4"
+version = "0.1.0"
 authors = [{ name = "MET Norway" }]
-description = "run pyaerocom aeroval tasks in parallel on the Met Norway PPI infrastructure"
+description = "simple python based repcaement for iconv also supporting weird encodings"
 readme = "README.md"
 classifiers = [
     "Programming Language :: Python :: 3 :: Only",
@@ -21,20 +21,16 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Atmospheric Science",
 ]
 requires-python = ">=3.8"
-dependencies = ["simplejson"]
+dependencies = []
 
 [project.optional-dependencies]
-proj-legacy = ["pyaerocom[proj-legacy]"]
-proj8 = ["pyaerocom[proj8]"]
 
 [project.urls]
-"Homepage" = "https://github.com/metno/pyaerocom-parallelization"
-"Bug Tracker" = "https://github.com/metno/pyaerocom-parallelization/issues"
+"Homepage" = "https://github.com/jgriesfeller/pyiconv"
+"Bug Tracker" = "https://github.com/jgriesfeller/pyiconv/issues"
 
 [project.scripts]
-aeroval_parallelize = "aeroval_parallelize.cli.aeroval_parallelise:main"
-aeroval_run_json_cfg = "aeroval_parallelize.cli.aeroval_run_json_cfg:main"
-pyaerocom_cachegen = "aeroval_parallelize.cli.pyaerocom_cachegen:main"
+pyiconv = "pyiconv.cli.pyiconv:main"
 
 [tool.black]
 target-version = ['py38']
