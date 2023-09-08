@@ -1,46 +1,54 @@
 #!/usr/bin/env python3
 """
-small helper program to read a aeroval config from a json file
+python based 'replacement' for iconv. Helpful in case you need the
+encodings only available with libiconv's --enable-extra-encodings compile flag
 
 """
-import argparse
+from __future__ import annotations
 
-import simplejson as json
+import argparse
+import codecs
+import sys
+
+from pyiconv.lib import ENCODINGS, DEFAULT_TO_ENCODING, DEFAULT_FROM_ENCODING
 
 
 def main():
-
     parser = argparse.ArgumentParser(
-        description="small helper to run aeroval configs from json files"
+        description="Python based 'repacement' for iconv; output will be written to stdout."
     )
-    parser.add_argument("files", help="file(s) to read", nargs="+")
+    parser.add_argument("files", help="file(s) to read", nargs="?")
     parser.add_argument(
-        "-d", "--dryrun", help="dry run, just print the config", action="store_true"
+        "-f", "--from-code", help="Specifies the encoding of the input.",
+        default=DEFAULT_FROM_ENCODING
     )
+    parser.add_argument(
+        "-t", "--to-code", help="Specifies the encoding of the input.",
+        default=DEFAULT_TO_ENCODING
+    )
+    parser.add_argument("--list", help="list encodings and exit.", action="store_true")
 
     args = parser.parse_args()
     options = {}
-    if args.files:
-        options["files"] = args.files
-        # to avoid that lustre access is checked if the help just needs to be printed
-        from pyaerocom.aeroval import EvalSetup, ExperimentProcessor
+    if args.list:
+        for enc in sorted(ENCODINGS):
+            print(enc)
+        sys.exit(0)
 
-    if args.dryrun:
-        options["dryrun"] = True
-    else:
-        options["dryrun"] = False
+    if args.files:
+        options["files"] = [args.files]
+
+    if args.from_code:
+        options["from_code"] = args.from_code
+
+    if args.to_code:
+        options["to_code"] = args.to_code
 
     for _file in options["files"]:
-        with open(_file, "r") as infile:
-            CFG = json.load(infile)
-        stp = EvalSetup(
-            **CFG,
-        )
-        ana = ExperimentProcessor(stp)
-        if not options["dryrun"]:
-            res = ana.run()
-        else:
-            print(stp)
+        with open(_file, "r", encoding=options["from_code"]) as infile:
+
+            for line in infile:
+                print(line.strip())
 
 
 if __name__ == "__main__":

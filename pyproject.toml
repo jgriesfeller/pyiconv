@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyaerocom_parallelization"
+name = "pyiconv"
 version = "0.1.0"
 authors = [{ name = "MET Norway" }]
 description = "simple python based repcaement for iconv also supporting weird encodings"
