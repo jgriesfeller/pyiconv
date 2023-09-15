@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pyiconv"
-version = "0.1.1"
+version = "0.1.2"
 authors = [{ name = "MET Norway" }]
 description = "simple python based replacement for iconv also supporting weird encodings"
 readme = "README.md"
@@ -33,48 +33,3 @@ dependencies = []
 [project.scripts]
 pyiconv = "pyiconv.cli.pyiconv:main"
 
-#[tool.black]
-#target-version = ['py39']
-#line-length = 99
-#
-#[tool.isort]
-#py_version = "39"
-#profile = "black"
-#src_paths = ["src"]
-#line_length = 99
-#
-#[tool.mypy]
-#python_version = "3.10"
-#warn_unused_configs = true
-#warn_unused_ignores = true
-#warn_no_return = true
-#warn_return_any = false
-#warn_unreachable = true
-#show_error_codes = true
-#pretty = true
-#sqlite_cache = true
-##exclude = "pyaerocom-tutorials|_build"
-#
-#[[tool.mypy.overrides]]
-#module = ["pyaerocom.*"]
-#warn_unused_ignores = false
-#
-#[tool.tox]
-#legacy_tox_ini = """
-#[tox]
-#envlist = py38, py39, py310, py311, py312, format, lint
-#skip_missing_interpreters = True
-#isolated_build = True
-#
-#[testenv:format]
-#commands =
-#    pre-commit run --all-files --show-diff-on-failure
-#deps =
-#    pre-commit
-#
-#[testenv:lint]
-#commands =
-#    mypy .
-#depends =
-#    mypy>=0.981
-#"""
