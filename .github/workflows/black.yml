@@ -9,6 +9,6 @@ jobs:
       - uses: actions/checkout@v3
       - uses: psf/black@stable
         with:
-          options: "--check --verbose -l 99 "
+          options: "--check --verbose -l 99 -t py39"
 #          src: "./src"
           version: "~= 22.0"
